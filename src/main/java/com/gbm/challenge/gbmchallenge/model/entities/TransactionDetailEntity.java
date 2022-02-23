@@ -1,10 +1,7 @@
 package com.gbm.challenge.gbmchallenge.model.entities;
 
 import com.gbm.challenge.gbmchallenge.enums.TransactionEnum;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.IdClass;
@@ -20,15 +17,15 @@ import java.util.UUID;
 @Entity(name = "TblTransactionDetail")
 @Getter
 @Setter
-@NoArgsConstructor
 @IdClass(TransactionDetailEntity.TransactionDetailId.class)
+@AllArgsConstructor
 public class TransactionDetailEntity {
 
-    @Column(name = "operation") private TransactionEnum operation;
-    @Column(name = "quantity") private BigInteger quantity;
-    @Column(name = "price") private BigDecimal price;
-    @Id @ManyToOne @JoinColumn(name = "issuer_id") IssuerEntity issuer;
-    @Id @ManyToOne @JoinColumn(name = "transaction_id") TransactionEntity transaction;
+    @Id @ManyToOne @JoinColumn(name = "transaction_id") private final TransactionEntity transaction;
+    @Id @ManyToOne @JoinColumn(name = "issuer_id") private final IssuerEntity issuer;
+    @Column(name = "operation") private final TransactionEnum operation;
+    @Column(name = "quantity") private final BigInteger quantity;
+    @Column(name = "price") private final BigDecimal price;
 
     @Getter
     @Setter

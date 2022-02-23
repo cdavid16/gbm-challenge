@@ -24,7 +24,7 @@ public class AccountStockEntity {
     @Id @JsonIgnore @ManyToOne @JoinColumn( name = "account_id") AccountEntity account;
     @Id @JsonIgnore @ManyToOne @JoinColumn( name = "issuer_id") IssuerEntity issuer;
 
-    public AccountStockEntity(AccountEntity account, IssuerEntity issuer, BigInteger quantity) {
+    public AccountStockEntity(final AccountEntity account, final IssuerEntity issuer, final  BigInteger quantity) {
         this.account = account;
         this.issuer = issuer;
         this.quantity = quantity;

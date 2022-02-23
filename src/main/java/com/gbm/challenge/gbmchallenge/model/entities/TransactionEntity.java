@@ -1,5 +1,6 @@
 package com.gbm.challenge.gbmchallenge.model.entities;
 
+import com.gbm.challenge.gbmchallenge.wrapper.UUIDSource;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,8 +28,8 @@ public class TransactionEntity {
     @OneToMany(mappedBy = "transaction") private Set<TransactionDetailEntity> transactionDetails;
     @ManyToOne @JoinColumn(name = "account_id") private AccountEntity account;
 
-    public TransactionEntity(AccountEntity account, Timestamp timestamp) {
-        this.transactionId = UUID.randomUUID();
+    public TransactionEntity(final AccountEntity account, final Timestamp timestamp) {
+        this.transactionId = UUIDSource.generateRandom().getRandomUUID();
         this.account = account;
         this.timestamp = timestamp;
         this.success = true;
