@@ -16,4 +16,10 @@ public class BigDecimalHelper {
         }
     }
 
+    public static void isPositive(Double value) {
+        if(!VALIDATOR.isInRange(value, 0, Long.MAX_VALUE)) {
+            throw new IllegalArgumentException("Given BigDecimal cannot be less than zero");
+        }
+    }
+
 }
