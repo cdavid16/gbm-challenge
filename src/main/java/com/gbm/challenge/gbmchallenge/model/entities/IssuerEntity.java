@@ -5,26 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity(name = "TblIssuer")
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "tbl_issuer")
 public class IssuerEntity {
 
-    @Id @Column(name = "issuer_id") private UUID issuerId;
+    @Id @Column(name = "issuer_id") private String issuerId;
     @Column(name = "name") private String name;
     @OneToMany(mappedBy = "issuer") private Set<TransactionDetailEntity> transactionDetails;
     @OneToMany(mappedBy = "issuer") private Set<AccountStockEntity> accountStocks;
 
     public IssuerEntity(final String name) {
-        this.issuerId = UUIDSource.generateRandom().getRandomUUID();
+        this.issuerId = UUIDSource.generateRandom().getRandomUUID().toString();
         this.name = name;
     }
 

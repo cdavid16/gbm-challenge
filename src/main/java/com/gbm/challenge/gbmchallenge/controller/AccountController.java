@@ -4,27 +4,26 @@ import com.gbm.challenge.gbmchallenge.factory.CreateAccountResponseFactory;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.request.CreateAccountDto;
 import com.gbm.challenge.gbmchallenge.model.response.CreateAccountResponse;
-import com.gbm.challenge.gbmchallenge.service.IAccountService;
+import com.gbm.challenge.gbmchallenge.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/accounts")
+@RestController
+@RequestMapping("/accounts")
 public class AccountController {
 
-    private IAccountService accountService;
+    private AccountService accountService;
 
     @Autowired
-    public AccountController(IAccountService accountService) {
+    public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
 
-    @PostMapping
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(code = HttpStatus.OK)
     public HttpEntity<CreateAccountResponse> createAccount(@RequestBody @Validated final CreateAccountDto request){
         AccountEntity accountEntity = accountService.createAccount(request.getCash());

@@ -15,4 +15,6 @@ public class MessageConstants {
 
     protected static final String CLOSED_MARKET_EXCEPTION_MESSAGE = "You cannot submit this operation because market has closed.";
 
+    protected static final String INVALID_ACCOUNT_EXCEPTION = "The account you are trying to use does not exist.";
+
 }

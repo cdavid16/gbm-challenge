@@ -5,27 +5,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity(name = "TblAccount")
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "tbl_account")
 public class AccountEntity {
 
-    @Id @Column(name = "account_id") private UUID accountId;
-    @Column(name = "balance") private BigDecimal balance;
+    @Id @Column(name = "account_id") private String accountId;
+    @Column(name = "balance") private Double balance;
     @OneToMany(mappedBy = "account") private Set<AccountStockEntity> accountStocks;
     @OneToMany(mappedBy = "account") private Set<TransactionEntity> transactions;
 
-    public AccountEntity(final BigDecimal balance) {
-        this.accountId = UUIDSource.generateRandom().getRandomUUID();
+    public AccountEntity(final Double balance) {
+        this.accountId = UUIDSource.generateRandom().getRandomUUID().toString();
         this.balance = balance;
     }
 }

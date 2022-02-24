@@ -5,8 +5,6 @@ import com.gbm.challenge.gbmchallenge.repository.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -14,17 +12,17 @@ import static org.mockito.Mockito.*;
 class AccountServiceTest {
 
     private AccountRepository repository;
-    private AccountService service;
+    private AccountServiceImpl service;
 
     @BeforeEach
     void init() {
         repository = mock(AccountRepository.class);
-        service = new AccountService(repository);
+        service = new AccountServiceImpl(repository);
     }
 
     @Test
     public void shouldReturnEntityWhenBalanceIsNotNull() {
-        BigDecimal balance = new BigDecimal("10");
+        Double balance = 10.0;
 
         service.createAccount(balance);
 
@@ -33,7 +31,7 @@ class AccountServiceTest {
 
     @Test
     public void shouldThrownExceptionWhenBalanceIsNull() {
-        BigDecimal balance = null;
+        Double balance = null;
 
         when(repository.saveAndFlush(any())).thenReturn(new AccountEntity());
 
@@ -42,7 +40,7 @@ class AccountServiceTest {
 
     @Test
     public void shouldThrownExceptionWhenBalanceIsNegative() {
-        BigDecimal balance = new BigDecimal("-1");
+        Double balance = -1.0;
 
         when(repository.saveAndFlush(any())).thenReturn(new AccountEntity());
 
