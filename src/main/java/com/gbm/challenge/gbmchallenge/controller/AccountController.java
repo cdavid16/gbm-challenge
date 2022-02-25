@@ -1,6 +1,6 @@
 package com.gbm.challenge.gbmchallenge.controller;
 
-import com.gbm.challenge.gbmchallenge.factory.CreateAccountResponseFactory;
+import com.gbm.challenge.gbmchallenge.factory.MapperResponseFactory;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.request.CreateAccountDto;
 import com.gbm.challenge.gbmchallenge.model.response.CreateAccountResponse;
@@ -27,7 +27,7 @@ public class AccountController {
     @ResponseStatus(code = HttpStatus.OK)
     public HttpEntity<CreateAccountResponse> createAccount(@RequestBody @Validated final CreateAccountDto request){
         AccountEntity accountEntity = accountService.createAccount(request.getCash());
-        CreateAccountResponse responseEntity = CreateAccountResponseFactory.CreateCreateAccountResponse(accountEntity);
+        CreateAccountResponse responseEntity = MapperResponseFactory.createPositiveResponse(accountEntity, CreateAccountResponse.class);
         return new HttpEntity<>(responseEntity);
     }
 

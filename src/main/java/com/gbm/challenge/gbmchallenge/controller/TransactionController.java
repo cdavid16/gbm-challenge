@@ -1,5 +1,7 @@
 package com.gbm.challenge.gbmchallenge.controller;
 
+import com.gbm.challenge.gbmchallenge.factory.MapperResponseFactory;
+import com.gbm.challenge.gbmchallenge.model.entities.TransactionEntity;
 import com.gbm.challenge.gbmchallenge.model.request.SendOrderDto;
 import com.gbm.challenge.gbmchallenge.model.response.SendOrderResponse;
 import com.gbm.challenge.gbmchallenge.service.TransactionService;
@@ -22,9 +24,11 @@ public class TransactionController {
     }
 
     @PostMapping("/accounts/{id}/orders")
-    public HttpEntity<SendOrderResponse> sendOrder(@PathVariable @Validated final Long accountId,
+    public HttpEntity<SendOrderResponse> sendOrder(@PathVariable @Validated final String accountId,
                                                    @RequestBody @Validated final SendOrderDto request){
-        return null;
+        TransactionEntity transactionEntity = transactionService.processTransaction(request, accountId);
+        SendOrderResponse responseEntity = MapperResponseFactory.createPositiveResponse(transactionEntity, SendOrderResponse.class);
+        return new HttpEntity<>(responseEntity);
     }
 
 }

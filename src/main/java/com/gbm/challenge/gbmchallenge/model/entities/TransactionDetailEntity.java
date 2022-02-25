@@ -5,8 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 
 @Getter
 @Setter
@@ -19,8 +17,8 @@ public class TransactionDetailEntity {
     @Id @ManyToOne @JoinColumn(name = "transaction_id") private final TransactionEntity transaction;
     @Id @ManyToOne @JoinColumn(name = "issuer_id") private final IssuerEntity issuer;
     @Column(name = "operation") private final TransactionEnum operation;
-    @Column(name = "quantity") private final BigInteger quantity;
-    @Column(name = "price") private final BigDecimal price;
+    @Column(name = "quantity") private final Long quantity;
+    @Column(name = "price") private final Double price;
 
     @Getter
     @Setter

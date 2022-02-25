@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 public class SendOrderDto {
 
-    @NonNull
     private Long timestamp;
     private OperationDto operation;
     private List<OperationDto> operations;
@@ -18,6 +17,13 @@ public class SendOrderDto {
     @JsonIgnore
     public boolean isMultiOperations(){
         return CollectionsHelper.isEmptyOrNull(operations);
+    }
+
+    public List<OperationDto> getOperations() {
+        if (isMultiOperations()) {
+            return this.getOperations();
+        }
+        return List.of(operation);
     }
 
 }
