@@ -19,8 +19,9 @@ public class DuplicateOperationValidatorImpl implements DuplicateOperationValida
     }
 
     @Override
-    public void validateDuplicateOperation(SendOrderDto orders, Set<TransactionEntity> transactions) {
+    public boolean validateDuplicateOperation(SendOrderDto orders, Set<TransactionEntity> transactions) {
 
+        return true;
     }
 
 }

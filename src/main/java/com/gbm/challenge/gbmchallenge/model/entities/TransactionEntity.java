@@ -2,10 +2,7 @@ package com.gbm.challenge.gbmchallenge.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gbm.challenge.gbmchallenge.wrapper.UUIDSource;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,6 +12,7 @@ import java.util.Set;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_transaction")
 public class TransactionEntity {

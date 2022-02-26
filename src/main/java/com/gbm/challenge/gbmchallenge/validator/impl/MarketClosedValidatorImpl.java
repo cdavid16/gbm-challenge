@@ -1,6 +1,7 @@
 package com.gbm.challenge.gbmchallenge.validator.impl;
 
 import com.gbm.challenge.gbmchallenge.exception.business.ClosedMarketException;
+import com.gbm.challenge.gbmchallenge.utils.NumberHelper;
 import com.gbm.challenge.gbmchallenge.validator.MarketClosedValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.util.Validate;
@@ -10,13 +11,11 @@ import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.Set;
 
 @Slf4j
 public class MarketClosedValidatorImpl implements MarketClosedValidator {
 
-    private static final String ZONE = "UTC";
     private static final Integer OPEN_HOUR = 6;
     private static final Integer CLOSE_HOUR = 15;
     private static final Set<DayOfWeek> WORKING_DAYS = Set.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,
@@ -30,13 +29,14 @@ public class MarketClosedValidatorImpl implements MarketClosedValidator {
     }
 
     @Override
-    public void validateMarketOpen(@Validated final Long timestamp) {
-        Validate.notNull(timestamp, "Given timestamp cannot be null");
+    public boolean validateMarketOpen(@Validated final Long timestamp) {
+        NumberHelper.isPositive(timestamp);
 
         LocalDateTime localDateTime = new Timestamp(timestamp).toLocalDateTime();
         validateDay(localDateTime);
         validateTime(localDateTime.toLocalTime());
         log.info("Market is open.");
+        return true;
     }
 
     private void validateDay(final LocalDateTime localDateTime) {
@@ -48,16 +48,10 @@ public class MarketClosedValidatorImpl implements MarketClosedValidator {
 
     private void validateTime(final LocalTime localTime) {
         int hour = localTime.getHour();
-        int minutes = localTime.getMinute();
-        int seconds = localTime.getSecond();
-        int nano = localTime.getNano();
         if (hour<OPEN_HOUR) {
             throw new ClosedMarketException();
         }
-        if (hour>CLOSE_HOUR) {
-            throw new ClosedMarketException();
-        }
-        if (hour==CLOSE_HOUR && (minutes>0 || seconds>0 || nano>0)) {
+        if (hour>=CLOSE_HOUR) {
             throw new ClosedMarketException();
         }
     }

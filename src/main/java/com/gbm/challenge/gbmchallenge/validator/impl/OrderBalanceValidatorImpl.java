@@ -24,7 +24,7 @@ public class OrderBalanceValidatorImpl implements OrderBalanceValidator {
     protected static OrderBalanceValidator getInstance() { return INSTANCE; }
 
     @Override
-    public void validateBalance(@Validated final SendOrderDto orders, @Validated final Double currentBalance) {
+    public boolean validateBalance(@Validated final SendOrderDto orders, @Validated final Double currentBalance) {
         Validate.notNull(orders, "The orders to be validated cannot be null");
         Validate.notNull(currentBalance, "Current balance cannot be null");
 
@@ -33,6 +33,7 @@ public class OrderBalanceValidatorImpl implements OrderBalanceValidator {
             throw new InsufficientBalanceException();
         }
         log.info("Order has passed balance validation.");
+        return true;
     }
 
     private Double getOperationBalance(final List<OperationDto> operations) {

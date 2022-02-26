@@ -13,6 +13,6 @@ public interface StockBalanceValidator {
      * @param orders Request which contains the orders that are going to be validated.
      * @param stocks Shares that the account has assigned.
      */
-    void validateStockBalance(SendOrderDto orders, Set<AccountStockEntity> stocks);
+    boolean validateStockBalance(SendOrderDto orders, Set<AccountStockEntity> stocks);
 
 }

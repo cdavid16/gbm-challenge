@@ -5,6 +5,6 @@ import com.gbm.challenge.gbmchallenge.model.request.SendOrderDto;
 @FunctionalInterface
 public interface OrderBalanceValidator {
 
-    void validateBalance(SendOrderDto orders, Double currentBalance);
+    boolean validateBalance(SendOrderDto orders, Double currentBalance);
 
 }

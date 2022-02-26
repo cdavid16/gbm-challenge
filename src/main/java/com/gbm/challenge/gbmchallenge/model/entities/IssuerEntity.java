@@ -1,10 +1,7 @@
 package com.gbm.challenge.gbmchallenge.model.entities;
 
 import com.gbm.challenge.gbmchallenge.wrapper.UUIDSource;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,6 +11,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_issuer")
 public class IssuerEntity {

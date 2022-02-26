@@ -25,12 +25,13 @@ public class StockBalanceValidatorImpl implements StockBalanceValidator {
     protected static StockBalanceValidator getInstance() { return INSTANCE; }
 
     @Override
-    public void validateStockBalance(SendOrderDto orders, Set<AccountStockEntity> stocks) {
+    public boolean validateStockBalance(SendOrderDto orders, Set<AccountStockEntity> stocks) {
         final Map<String, AccountStockEntity> accountStocks = buildBalanceMap(stocks);
         for (OperationDto operation : orders.getOperations()) {
             validateStockOperation(accountStocks, operation);
         }
         log.info("Order has passed stock balance validation.");
+        return true;
     }
 
     private void validateStockOperation(Map<String, AccountStockEntity> accountStocks, OperationDto operation) {

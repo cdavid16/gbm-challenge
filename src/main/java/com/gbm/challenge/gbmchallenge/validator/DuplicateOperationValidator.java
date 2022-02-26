@@ -8,6 +8,6 @@ import java.util.Set;
 @FunctionalInterface
 public interface DuplicateOperationValidator {
 
-    void validateDuplicateOperation(SendOrderDto orders, Set<TransactionEntity> transactions);
+    boolean validateDuplicateOperation(SendOrderDto orders, Set<TransactionEntity> transactions);
 
 }
