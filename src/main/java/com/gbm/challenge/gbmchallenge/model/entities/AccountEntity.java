@@ -4,14 +4,14 @@ import com.gbm.challenge.gbmchallenge.wrapper.UUIDSource;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @Entity
 @Table(name = "tbl_account")

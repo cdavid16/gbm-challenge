@@ -1,6 +1,6 @@
 package com.gbm.challenge.gbmchallenge.repository;
 
-import com.gbm.challenge.gbmchallenge.enums.TransactionEnum;
+import com.gbm.challenge.gbmchallenge.enums.OperationEnum;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.IssuerEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.TransactionDetailEntity;
@@ -16,7 +16,7 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity, 
     }
 
     default TransactionDetailEntity createTransactionDetail(TransactionEntity transaction, IssuerEntity issuer,
-                                                            TransactionEnum operation, Long quantity, Double price) {
+                                                            OperationEnum operation, Long quantity, Double price) {
         TransactionDetailEntity transactionDetail = new TransactionDetailEntity(transaction, issuer, operation,
                                             quantity, price);
         transaction.getTransactionDetails().add(transactionDetail);

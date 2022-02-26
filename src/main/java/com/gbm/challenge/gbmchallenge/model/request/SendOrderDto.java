@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gbm.challenge.gbmchallenge.utils.CollectionsHelper;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.ToString;
 
 import java.util.List;
 
 @Getter
+@ToString
 public class SendOrderDto {
 
     private Long timestamp;

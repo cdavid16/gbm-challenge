@@ -6,6 +6,7 @@ import com.gbm.challenge.gbmchallenge.model.entities.TransactionDetailEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.apache.commons.lang.util.Validate;
 
 import java.util.Collections;
@@ -14,6 +15,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
+@ToString
 @RequiredArgsConstructor
 public class SendOrderResponse {
 

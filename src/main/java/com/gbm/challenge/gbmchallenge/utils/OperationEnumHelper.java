@@ -1,11 +1,11 @@
 package com.gbm.challenge.gbmchallenge.utils;
 
-import com.gbm.challenge.gbmchallenge.enums.TransactionEnum;
+import com.gbm.challenge.gbmchallenge.enums.OperationEnum;
 import com.gbm.challenge.gbmchallenge.exception.business.InvalidOperationException;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class TransactionHelper {
+public class OperationEnumHelper {
 
     public static boolean isValid(String transaction) {
         try{
@@ -16,14 +16,14 @@ public class TransactionHelper {
         return true;
     }
 
-    public static TransactionEnum parseStringToEnum(String transaction) {
-        final TransactionEnum transactionEnum;
+    public static OperationEnum parseStringToEnum(String transaction) {
+        final OperationEnum operationEnum;
         try{
-            transactionEnum = TransactionEnum.valueOf(transaction);
+            operationEnum = OperationEnum.valueOf(transaction);
         } catch (IllegalArgumentException e) {
             throw new InvalidOperationException();
         }
-        return transactionEnum;
+        return operationEnum;
     }
 
 }

@@ -8,8 +8,11 @@ import com.gbm.challenge.gbmchallenge.validator.StockBalanceValidator;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.gbm.challenge.gbmchallenge.utils.AccountStockHelper.buildBalanceMap;
 
 public class StockBalanceValidatorImpl implements StockBalanceValidator {
 
@@ -21,20 +24,21 @@ public class StockBalanceValidatorImpl implements StockBalanceValidator {
 
     @Override
     public void validateStockBalance(SendOrderDto orders, Set<AccountStockEntity> stocks) {
-        final Map<String, Long> balance = buildBalanceMap(stocks);
+        final Map<String, AccountStockEntity> accountStocks = buildBalanceMap(stocks);
         for (OperationDto operation : orders.getOperations()) {
-            validateStockOperation(balance, operation);
+            validateStockOperation(accountStocks, operation);
         }
     }
 
-    private Map<String, Long> buildBalanceMap(Set<AccountStockEntity> stocks) {
-        return stocks.stream().collect(
-                Collectors.<AccountStockEntity, String, Long>toMap(km-> km.getIssuer().getName(),
-                        AccountStockEntity::getQuantity));
-    }
+    private void validateStockOperation(Map<String, AccountStockEntity> accountStocks, OperationDto operation) {
+        final AccountStockEntity currentAccountStock = accountStocks.get(operation.getIssuer());
+        final Long currentStock;
+        if (Objects.isNull(currentAccountStock)) {
+            currentStock = 0L;
+        } else {
+            currentStock = currentAccountStock.getQuantity();
+        }
 
-    private void validateStockOperation(Map<String, Long> balance, OperationDto operation) {
-        final Long currentStock = balance.getOrDefault(operation.getIssuer(), 0L);
         if (currentStock.compareTo(operation.getTotalShares()) < 0) {
             throw new InsufficientStocksException();
         }

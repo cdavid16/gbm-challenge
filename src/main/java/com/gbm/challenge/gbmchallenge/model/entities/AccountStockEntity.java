@@ -2,13 +2,17 @@ package com.gbm.challenge.gbmchallenge.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_account_stock")
 @IdClass(AccountStockEntity.AccountStockEntityId.class)
@@ -26,8 +30,9 @@ public class AccountStockEntity {
 
     @Getter
     @Setter
+    @ToString
     @RequiredArgsConstructor
-    protected static class AccountStockEntityId implements Serializable {
+    public static class AccountStockEntityId implements Serializable {
         private final AccountEntity account;
         private final IssuerEntity issuer;
     }

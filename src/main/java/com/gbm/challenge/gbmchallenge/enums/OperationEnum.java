@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum TransactionEnum {
+public enum OperationEnum {
     BUY(-1),
     SELL(1);
 
