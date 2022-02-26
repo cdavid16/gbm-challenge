@@ -28,7 +28,7 @@ public class ErrorController extends ResponseEntityExceptionHandler {
     @ExceptionHandler({BusinessException.class})
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public final HttpEntity<String> handleBusinessErrors(BusinessException error, WebRequest request){
-        log.error("An exception happened while processing the request, {}", error);
+        log.error("An exception happened while processing the request, {}", error.toString());
         try{
             Object cash = request.getAttribute("cash", RequestAttributes.SCOPE_REQUEST);
 
@@ -36,7 +36,8 @@ public class ErrorController extends ResponseEntityExceptionHandler {
                 throw new IllegalArgumentException("Request variable could not be set.");
             }
 
-            return new HttpEntity(createNegativeResponse(error.getExceptionCode(), Objects.toString(cash)));
+            return new HttpEntity<>(createNegativeResponse(error.getExceptionCode(),
+                    Objects.toString(cash)).toString());
         } catch (Exception e) {
             return handleUnexpectedErrors(e, request);
         }
@@ -46,7 +47,7 @@ public class ErrorController extends ResponseEntityExceptionHandler {
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR,
                     reason = "An unexpected error happened while processing the request")
     public final HttpEntity<String> handleUnexpectedErrors(Exception error, WebRequest request){
-        log.error("An unhandled exception happened while processing the request {}", error);
+        log.error("An unhandled exception happened while processing the request {}", (Object) error.getStackTrace());
         return new HttpEntity<>("An unexpected error happened while processing the request");
     }
 

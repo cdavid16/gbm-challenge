@@ -66,8 +66,7 @@ public class TransactionServiceImpl implements TransactionService {
                         .map(td -> td.getIssuer().getName())
                         .collect(Collectors.toSet()));
         log.info("Account and stock balances were updated successfully.");
-        this.accountRepository.saveAndFlush(account);
-        this.transactionRepository.saveAndFlush(transaction);
+        this.commitTransaction(account, transaction);
         log.info("DB Has committed the transactions.");
         return transaction;
     }
@@ -125,5 +124,11 @@ public class TransactionServiceImpl implements TransactionService {
             this.accountStockRepository.createAccountStockEntity(transactionDetail.getQuantity(),
                     transactionDetail.getTransaction().getAccount(), transactionDetail.getIssuer());
         }
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    private void commitTransaction(AccountEntity account, TransactionEntity transaction) {
+        this.accountRepository.saveAndFlush(account);
+        this.transactionRepository.saveAndFlush(transaction);
     }
 }
