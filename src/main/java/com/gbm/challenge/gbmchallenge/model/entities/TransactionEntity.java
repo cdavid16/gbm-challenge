@@ -1,5 +1,6 @@
 package com.gbm.challenge.gbmchallenge.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gbm.challenge.gbmchallenge.wrapper.UUIDSource;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,8 @@ public class TransactionEntity {
     @Column(name = "timestmp") private Long timestamp;
     @Column(name = "success") private boolean success;
 
-    @OneToMany(mappedBy = "transaction") private Set<TransactionDetailEntity> transactionDetails;
-    @ManyToOne @JoinColumn(name = "account_id") private AccountEntity account;
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL) private Set<TransactionDetailEntity> transactionDetails;
+    @ManyToOne @JoinColumn(name = "account_id") @ToString.Exclude private AccountEntity account;
 
     public TransactionEntity(final AccountEntity account, final Long timestamp) {
         this.transactionId = UUIDSource.generateRandom().getRandomUUID().toString();

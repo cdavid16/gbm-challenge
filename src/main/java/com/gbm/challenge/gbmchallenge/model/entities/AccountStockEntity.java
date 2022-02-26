@@ -19,8 +19,8 @@ import java.io.Serializable;
 public class AccountStockEntity {
 
     @Column(name = "quantity") private Long quantity;
-    @Id @JsonIgnore @ManyToOne @JoinColumn( name = "account_id") AccountEntity account;
-    @Id @JsonIgnore @ManyToOne @JoinColumn( name = "issuer_id") IssuerEntity issuer;
+    @Id @ToString.Exclude @ManyToOne @JoinColumn( name = "account_id") AccountEntity account;
+    @Id @ToString.Exclude @ManyToOne @JoinColumn( name = "issuer_id") IssuerEntity issuer;
 
     public AccountStockEntity(final AccountEntity account, final IssuerEntity issuer, final  Long quantity) {
         this.account = account;
@@ -31,10 +31,10 @@ public class AccountStockEntity {
     @Getter
     @Setter
     @ToString
-    @RequiredArgsConstructor
+    @NoArgsConstructor
     public static class AccountStockEntityId implements Serializable {
-        private final AccountEntity account;
-        private final IssuerEntity issuer;
+        private AccountEntity account;
+        private IssuerEntity issuer;
     }
 
 }

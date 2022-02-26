@@ -3,25 +3,20 @@ package com.gbm.challenge.gbmchallenge.model.response;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.gbm.challenge.gbmchallenge.exception.business.BusinessException;
 import com.gbm.challenge.gbmchallenge.model.entities.TransactionDetailEntity;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.apache.commons.lang.util.Validate;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class SendOrderResponse {
 
 
     @JsonAlias("current_balance") private CurrentBalance currentBalance;
-    @JsonAlias("business_errors") @Setter private List<BusinessException> exceptions;
+    @JsonAlias("business_errors") @Setter private List<String> exceptions;
 
     public void setCash(Double cash) {
         if (Objects.isNull(currentBalance)) {
@@ -32,21 +27,11 @@ public class SendOrderResponse {
 
     public void setIssuerResponse(Set<TransactionDetailEntity> transactions) {
         Validate.notNull(transactions, "Transactions cannot be null");
-        this.currentBalance.setIssuers(Collections.emptyList());
+        this.currentBalance.setIssuers(new ArrayList<>());
         for (TransactionDetailEntity transactionDetail : transactions) {
             IssuerResponse issuerResponse = new IssuerResponse(transactionDetail.getIssuer().getName(),
                     transactionDetail.getQuantity(), transactionDetail.getPrice());
             this.currentBalance.getIssuers().add(issuerResponse);
         }
     }
-
-    @Setter
-    @Getter
-    protected static final class CurrentBalance {
-        @JsonAlias("cash") Double cash;
-        @JsonAlias("issuers") List<IssuerResponse> issuers;
-    }
-
-
-
 }

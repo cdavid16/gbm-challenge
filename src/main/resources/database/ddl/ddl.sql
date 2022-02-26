@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS tbl_account_stock(account_id varchar(36) REFERENCES T
 
 CREATE TABLE IF NOT EXISTS tbl_transaction(transaction_id varchar(36) primary key,
                                         account_id varchar(36) REFERENCES TblAccount(account_id),
-                                        timestmp timestamp, success boolean);
+                                        timestmp BIGINT, success boolean);
 
 CREATE TABLE IF NOT EXISTS tbl_transaction_detail(transaction_id varchar(36) references TblTransaction(transaction_id),
                                         issuer_id varchar(36) references TblIssuer(issuer_id),

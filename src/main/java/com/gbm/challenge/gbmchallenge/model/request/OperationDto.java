@@ -1,16 +1,17 @@
 package com.gbm.challenge.gbmchallenge.model.request;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 @Getter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class OperationDto {
 
-    @NonNull private String operation;
-    @NonNull private String issuer;
-    @NonNull private Long totalShares;
-    @NonNull private Double sharePrice;
+    @JsonProperty("operation") private String operation;
+    @JsonProperty("issuer_name") private String issuer;
+    @JsonProperty("total_shares") private Long totalShares;
+    @JsonProperty("share_price") private Double sharePrice;
 
 }

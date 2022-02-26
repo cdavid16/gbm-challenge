@@ -1,10 +1,9 @@
 package com.gbm.challenge.gbmchallenge.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gbm.challenge.gbmchallenge.utils.CollectionsHelper;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,20 +11,29 @@ import java.util.List;
 @ToString
 public class SendOrderDto {
 
-    private Long timestamp;
-    private OperationDto operation;
-    private List<OperationDto> operations;
+    @JsonProperty("timestamp") private Long timestamp;
+    @JsonProperty("operation") private String operation;
+    @JsonProperty("issuer_name") private String issuer;
+    @JsonProperty("total_shares") private Long totalShares;
+    @JsonProperty("share_price") private Double sharePrice;
+    @JsonProperty("operations") private List<OperationDto> operations;
 
     @JsonIgnore
     public boolean isMultiOperations(){
-        return CollectionsHelper.isEmptyOrNull(operations);
+        return !CollectionsHelper.isEmptyOrNull(operations);
     }
 
+    @JsonIgnore
     public List<OperationDto> getOperations() {
         if (isMultiOperations()) {
-            return this.getOperations();
+            return this.operations;
         }
-        return List.of(operation);
+        return List.of(getOperation());
+    }
+
+    @JsonIgnore
+    public OperationDto getOperation() {
+        return new OperationDto(this.operation, this.issuer, this.totalShares, this.sharePrice);
     }
 
 }

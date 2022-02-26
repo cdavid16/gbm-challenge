@@ -2,6 +2,7 @@ package com.gbm.challenge.gbmchallenge.validator.impl;
 
 import com.gbm.challenge.gbmchallenge.exception.business.ClosedMarketException;
 import com.gbm.challenge.gbmchallenge.validator.MarketClosedValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.util.Validate;
 import org.springframework.validation.annotation.Validated;
 
@@ -12,11 +13,12 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Set;
 
+@Slf4j
 public class MarketClosedValidatorImpl implements MarketClosedValidator {
 
     private static final String ZONE = "UTC";
     private static final Integer OPEN_HOUR = 6;
-    private static final Integer CLOSE_HOUR = 6;
+    private static final Integer CLOSE_HOUR = 15;
     private static final Set<DayOfWeek> WORKING_DAYS = Set.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,
             DayOfWeek.THURSDAY, DayOfWeek.FRIDAY);
     private static final MarketClosedValidator INSTANCE = new MarketClosedValidatorImpl();
@@ -31,14 +33,15 @@ public class MarketClosedValidatorImpl implements MarketClosedValidator {
     public void validateMarketOpen(@Validated final Long timestamp) {
         Validate.notNull(timestamp, "Given timestamp cannot be null");
 
-        LocalDateTime localDateTime = new Timestamp(timestamp).toInstant().atZone(ZoneId.of(ZONE)).toLocalDateTime();
+        LocalDateTime localDateTime = new Timestamp(timestamp).toLocalDateTime();
         validateDay(localDateTime);
         validateTime(localDateTime.toLocalTime());
+        log.info("Market is open.");
     }
 
     private void validateDay(final LocalDateTime localDateTime) {
         DayOfWeek dayOfWeek = localDateTime.getDayOfWeek();
-        if (WORKING_DAYS.contains(dayOfWeek)) {
+        if (!WORKING_DAYS.contains(dayOfWeek)) {
             throw new ClosedMarketException();
         }
     }

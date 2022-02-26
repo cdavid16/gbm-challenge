@@ -8,7 +8,7 @@ public class OperationHelper {
 
     public static Double computeAmountApplied(final OperationEnum transaction, final Long totalShares,
                                         final Double sharePrice) {
-        return totalShares * sharePrice * transaction.getBalanceFactor() * -1;
+        return totalShares * sharePrice * transaction.getBalanceFactor();
     }
 
 }

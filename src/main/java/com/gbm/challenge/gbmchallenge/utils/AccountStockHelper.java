@@ -30,8 +30,8 @@ public class AccountStockHelper {
 
     public static AccountStockEntity updateStockBalance(OperationEnum operation, AccountStockEntity currentPosition,
                                                         Long transactionShares) {
-        Long currentShares = currentPosition.getQuantity() + (transactionShares * operation.getBalanceFactor());
-        currentPosition.setQuantity(currentShares);
+        long currentShares = currentPosition.getQuantity() + (transactionShares * operation.getBalanceFactor());
+        currentPosition.setQuantity(Math.abs(currentShares));
         return currentPosition;
     }
 

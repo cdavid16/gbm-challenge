@@ -7,7 +7,7 @@ import com.gbm.challenge.gbmchallenge.utils.CollectionsHelper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
+import java.util.HashSet;
 
 @Repository
 public interface AccountStockRepository extends JpaRepository<AccountStockEntity,
@@ -17,7 +17,7 @@ public interface AccountStockRepository extends JpaRepository<AccountStockEntity
         AccountStockEntity entity = new AccountStockEntity(quantity, account, issuer);
 
         if (CollectionsHelper.isEmptyOrNull(account.getAccountStocks())) {
-            account.setAccountStocks(Collections.emptySet());
+            account.setAccountStocks(new HashSet<>());
         }
         account.getAccountStocks().add(entity);
 

@@ -12,7 +12,7 @@ public interface AccountRepository extends JpaRepository<AccountEntity, String> 
 
     default AccountEntity createAccountAndFlush(Double balance) {
         AccountEntity entity = new AccountEntity(balance);
-        return save(entity);
+        return saveAndFlush(entity);
     }
 
     default AccountEntity findAccountById(String accountId) {

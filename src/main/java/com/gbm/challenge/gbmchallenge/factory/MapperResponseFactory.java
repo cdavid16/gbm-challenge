@@ -5,13 +5,16 @@ import com.gbm.challenge.gbmchallenge.mapper.TransactionEntityResponseMapper;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.TransactionEntity;
 import com.gbm.challenge.gbmchallenge.model.response.CreateAccountResponse;
+import com.gbm.challenge.gbmchallenge.model.response.CurrentBalance;
 import com.gbm.challenge.gbmchallenge.model.response.SendOrderResponse;
 import lombok.experimental.UtilityClass;
 import org.modelmapper.ModelMapper;
 
+import java.util.List;
 import java.util.Map;
 
 import static java.util.Map.entry;
+
 
 @UtilityClass
 public class MapperResponseFactory {
@@ -33,5 +36,10 @@ public class MapperResponseFactory {
             throw new IllegalArgumentException("There is no mapping between the desired classes");
         }
         return map.get(key).map(source, destinationType);
+    }
+
+    public static SendOrderResponse createNegativeResponse(String exceptionCode, String cash) {
+        CurrentBalance currentBalance = new CurrentBalance(Double.valueOf(cash), List.of());
+        return new SendOrderResponse(currentBalance, List.of(exceptionCode));
     }
 }

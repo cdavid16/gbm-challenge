@@ -19,8 +19,8 @@ public class AccountEntity {
 
     @Id @Column(name = "account_id") private String accountId;
     @Column(name = "balance") private Double balance;
-    @OneToMany(mappedBy = "account") private Set<AccountStockEntity> accountStocks;
-    @OneToMany(mappedBy = "account") private Set<TransactionEntity> transactions;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL) private Set<AccountStockEntity> accountStocks;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL) private Set<TransactionEntity> transactions;
 
     public AccountEntity(final Double balance) {
         this.accountId = UUIDSource.generateRandom().getRandomUUID().toString();

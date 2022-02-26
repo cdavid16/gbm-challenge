@@ -14,6 +14,8 @@ import com.gbm.challenge.gbmchallenge.validator.OrderValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.transaction.Transactional;
 
@@ -46,18 +48,27 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Transactional(rollbackOn = Exception.class)
     @Override
-    public TransactionEntity processTransaction(SendOrderDto orderRequest, String accountId) {
+    public TransactionEntity processTransaction(final SendOrderDto orderRequest,
+                                                final String accountId,
+                                                final WebRequest webRequest) {
+        log.info("Processing order {} for accountId: {}", orderRequest, accountId);
         AccountEntity account = this.accountRepository.findAccountById(accountId);
+        webRequest.setAttribute("cash", account.getBalance(), RequestAttributes.SCOPE_REQUEST);
         OrderValidator.getInstance().validate(orderRequest, account);
         TransactionEntity transaction = createTransaction(account, orderRequest.getTimestamp());
+        log.info("The transaction header {} was created successfully.", transaction);
         Double balance = processOrderDetailsAndGetOrderBalance(orderRequest, transaction);
+        log.info("Transaction details were created successfully. Transaction={}", transaction);
         updateAccountBalance(account, balance);
         updateAccountStock(transaction,
                 transaction.getTransactionDetails()
                         .stream()
                         .map(td -> td.getIssuer().getName())
                         .collect(Collectors.toSet()));
-        this.transactionRepository.commitTransaction(transaction);
+        log.info("Account and stock balances were updated successfully.");
+        this.accountRepository.saveAndFlush(account);
+        this.transactionRepository.saveAndFlush(transaction);
+        log.info("DB Has committed the transactions.");
         return transaction;
     }
 
@@ -89,7 +100,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void updateAccountBalance(final AccountEntity account, final Double amountToApply) {
         Double currentBalance = account.getBalance();
-        account.setBalance(currentBalance - amountToApply);
+        account.setBalance(currentBalance + amountToApply);
     }
 
     private double processOrderDetailsAndGetOrderBalance(final SendOrderDto orderRequest,
