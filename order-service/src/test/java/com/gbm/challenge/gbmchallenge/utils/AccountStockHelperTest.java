@@ -1,21 +1,61 @@
 package com.gbm.challenge.gbmchallenge.utils;
 
+import com.gbm.challenge.gbmchallenge.BaseTestWithData;
 import com.gbm.challenge.gbmchallenge.enums.OperationEnum;
 import com.gbm.challenge.gbmchallenge.exception.business.InsufficientStocksException;
 import com.gbm.challenge.gbmchallenge.mockdata.AccountStockData;
+import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountStockEntity;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
 import java.util.Set;
 
+import static com.gbm.challenge.gbmchallenge.utils.AccountStockHelper.buildBalanceMap;
+import static java.util.Map.entry;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-class AccountStockHelperTest {
+class AccountStockHelperTest extends BaseTestWithData {
 
     @Test
-    void buildBalanceMapShouldReturnAllTransactionsAsMap() {
+    void buildBalanceMapShouldThrowInvalidArgumentExceptionWhenStocksIsNullAndThereIsNoFilter() {
+        assertThrows(IllegalArgumentException.class, ()-> buildBalanceMap(null));
+    }
 
+    @Test
+    void buildBalanceMapShouldReturnAllTransactionsAsMapWhenNoFilterIsPassed() {
+        Set<AccountStockEntity> accountStocks = accountStockData.getDetails();
+        AccountEntity account = accountData.getDummyAccount();
+        Map<String, AccountStockEntity> expected = Map.ofEntries(
+                entry("AMZN", new AccountStockEntity(75L, account, issuerData.AMZN)),
+                entry("NFTX", new AccountStockEntity(0L,account, issuerData.NFTX)),
+                entry("AAPL", new AccountStockEntity(10L, account, issuerData.AAPL))
+        );
+
+        Map<String, AccountStockEntity> actual = buildBalanceMap(accountStocks);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void buildBalanceMapShouldSucceedWhenNoFilterIsPassedAndSetIsEmpty() {
+        Set<AccountStockEntity> accountStocks = Set.of();
+        Map<String, AccountStockEntity> expected = Map.of();
+
+        Map<String, AccountStockEntity> actual = buildBalanceMap(accountStocks);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void buildBalanceMapShouldSucceedWhenFilterIsPassedButRemoveAllResults() {
+        Set<AccountStockEntity> accountStocks = accountStockData.getDetails();
+        Map<String, AccountStockEntity> expected = Map.of();
+
+        Map<String, AccountStockEntity> actual = buildBalanceMap(accountStocks, x-> false);
+
+        assertEquals(expected, actual);
     }
 
     @Test

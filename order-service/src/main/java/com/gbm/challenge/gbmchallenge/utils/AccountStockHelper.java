@@ -16,14 +16,14 @@ public class AccountStockHelper {
 
     private static final Predicate<AccountStockEntity> FIND_ALL = accountStockEntity -> true;
 
-    //TODO Unit test
     public static Map<String, AccountStockEntity> buildBalanceMap(final Set<AccountStockEntity> stocks) {
         return buildBalanceMap(stocks, FIND_ALL);
     }
 
-    //TODO Unit test
     public static Map<String, AccountStockEntity> buildBalanceMap(final Set<AccountStockEntity> stocks,
                                                     final Predicate<AccountStockEntity> filter) {
+        Validate.notNull(stocks);
+        Validate.notNull(filter);
         return stocks
                 .stream()
                 .filter(filter)

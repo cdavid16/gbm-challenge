@@ -51,7 +51,6 @@ public class TransactionServiceImpl implements TransactionService {
         this.orderValidator = orderValidator;
     }
 
-    //TODO Unit Test
     @Transactional(rollbackOn = Exception.class)
     @Override
     public TransactionEntity processTransaction(final SendOrderDto orderRequest,

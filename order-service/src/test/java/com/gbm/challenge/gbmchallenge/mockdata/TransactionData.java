@@ -6,14 +6,12 @@ import java.util.Set;
 
 public class TransactionData {
 
-    private final AccountData accountData;
     public final TransactionEntity TRANSACTION_1;
     public final TransactionEntity TRANSACTION_2;
     public final TransactionEntity TRANSACTION_3;
     private final Set<TransactionEntity> transactionEntities;
 
     public TransactionData(final AccountData accountData) {
-        this.accountData = accountData;
         TRANSACTION_1 = new TransactionEntity("1",
                 1645813301000L, true,
                 null,
@@ -27,6 +25,7 @@ public class TransactionData {
                 null,
                 accountData.getDummyAccount());
         transactionEntities = Set.of(TRANSACTION_1, TRANSACTION_2, TRANSACTION_3);
+        accountData.getDummyAccount().setTransactions(transactionEntities);
     }
 
     public TransactionEntity getDummyTransaction() {

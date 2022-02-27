@@ -16,7 +16,6 @@ import com.gbm.challenge.gbmchallenge.repository.TransactionRepository;
 import com.gbm.challenge.gbmchallenge.service.TransactionService;
 import com.gbm.challenge.gbmchallenge.validator.OrderValidator;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.context.request.WebRequest;
 
@@ -167,14 +166,50 @@ class TransactionServiceImplTest extends BaseTestWithData {
     }
 
     @Test
-    void processTransactionShouldThrowInvalidAccountExceptionWhenAccountDoesNotExis() {
+    void processTransactionShouldSucceedWhenOrderIsSingleBuy() {
         String accountId = "1";
         WebRequest webRequest = mock(WebRequest.class);
         SendOrderDto order = SendOrderDtoValidData.getSingleOrderBuy();
+        Long timestamp = 1645813301000L;
+        AccountEntity account = accountData.getDummyAccount();
 
-        when(accountRepository.findAccountById(accountId)).thenReturn(accountData.getDummyAccount());
+        when(accountRepository.findAccountById(accountId)).thenReturn(account);
+        when(transactionRepository.createTransaction(account, timestamp)).thenReturn(transactionData.TRANSACTION_1);
 
         service.processTransaction(order, accountId, webRequest);
+        verify(accountRepository, times(1)).saveAndFlush(account);
+        verify(transactionRepository, times(1)).saveAndFlush(transactionData.TRANSACTION_1);
     }
 
+    @Test
+    void processTransactionShouldSucceedWhenOrderIsSingleSell() {
+        String accountId = "1";
+        WebRequest webRequest = mock(WebRequest.class);
+        SendOrderDto order = SendOrderDtoValidData.getSingleOrderSell();
+        Long timestamp = 1645813301000L;
+        AccountEntity account = accountData.getDummyAccount();
+
+        when(accountRepository.findAccountById(accountId)).thenReturn(account);
+        when(transactionRepository.createTransaction(account, timestamp)).thenReturn(transactionData.TRANSACTION_1);
+
+        service.processTransaction(order, accountId, webRequest);
+        verify(accountRepository, times(1)).saveAndFlush(account);
+        verify(transactionRepository, times(1)).saveAndFlush(transactionData.TRANSACTION_1);
+    }
+
+    @Test
+    void processTransactionShouldSucceedWhenOrderIsMultiOrder() {
+        String accountId = "1";
+        WebRequest webRequest = mock(WebRequest.class);
+        SendOrderDto order = SendOrderDtoValidData.getMultiOrder();
+        Long timestamp = 1645813301000L;
+        AccountEntity account = accountData.getDummyAccount();
+
+        when(accountRepository.findAccountById(accountId)).thenReturn(account);
+        when(transactionRepository.createTransaction(account, timestamp)).thenReturn(transactionData.TRANSACTION_1);
+
+        service.processTransaction(order, accountId, webRequest);
+        verify(accountRepository, times(1)).saveAndFlush(account);
+        verify(transactionRepository, times(1)).saveAndFlush(transactionData.TRANSACTION_1);
+    }
 }

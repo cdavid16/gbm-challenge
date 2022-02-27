@@ -3,12 +3,12 @@ package com.gbm.challenge.gbmchallenge.mockdata;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountStockEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.IssuerEntity;
+import com.gbm.challenge.gbmchallenge.model.entities.TransactionEntity;
 
 import java.util.Set;
 import java.util.stream.LongStream;
 
-import static com.gbm.challenge.gbmchallenge.mockdata.FilterData.getAccountStockByIssuerId;
-import static com.gbm.challenge.gbmchallenge.mockdata.FilterData.getTransactionDetailsByIssuerId;
+import static com.gbm.challenge.gbmchallenge.mockdata.FilterData.*;
 import static org.mockito.Mockito.mock;
 
 public class AccountStockData extends BaseQueryableDummy<AccountStockEntity> {
@@ -26,12 +26,15 @@ public class AccountStockData extends BaseQueryableDummy<AccountStockEntity> {
                 new AccountStockEntity(calculateStockQty(issuerData.AAPL, transactionDetailData),
                         accountData.getDummyAccount(), issuerData.AAPL)
         );
-        issuerData.AMZN.setAccountStocks(getTransactionDetails(
-                getAccountStockByIssuerId(issuerData.AMZN.getIssuerId())));
-        issuerData.AAPL.setAccountStocks(getTransactionDetails(
-                getAccountStockByIssuerId(issuerData.AAPL.getIssuerId())));
-        issuerData.NFTX.setAccountStocks(getTransactionDetails(
-                getAccountStockByIssuerId(issuerData.NFTX.getIssuerId())));
+        createRelationships(issuerData.issuers, accountData.getDummyAccount());
+    }
+
+    private void createRelationships(Set<IssuerEntity> issuers, AccountEntity account) {
+        for(IssuerEntity issuer : issuers) {
+            issuer.setAccountStocks(
+                    getTransactionDetails(getAccountStockByIssuerId(issuer.getIssuerId())));
+        }
+        account.setAccountStocks(ACCOUNT_STOCK_ENTITIES);
     }
 
     public static AccountStockEntity getDummy() {

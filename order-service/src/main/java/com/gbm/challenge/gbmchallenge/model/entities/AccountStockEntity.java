@@ -10,6 +10,7 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "tbl_account_stock")
 @IdClass(AccountStockEntity.AccountStockEntityId.class)
