@@ -25,7 +25,7 @@ class AccountServiceTest {
 
         service.createAccount(balance);
 
-        verify(repository, times(1)).saveAndFlush(any());
+        verify(repository, times(1)).createAccountAndFlush(any());
     }
 
     @Test
