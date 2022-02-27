@@ -7,11 +7,10 @@ import java.util.List;
 
 class CollectionsHelperTest {
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void shouldBeTrueWhenCollectionIsNull() {
-        List<String> collection = null;
-        var actual = CollectionsHelper.isEmptyOrNull(collection);
-        Assertions.assertTrue(actual);
+        Assertions.assertTrue(CollectionsHelper.isEmptyOrNull(null));
     }
 
     @Test

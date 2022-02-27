@@ -1,10 +1,8 @@
 package com.gbm.challenge.gbmchallenge.controller;
 
 import com.gbm.challenge.gbmchallenge.exception.business.BusinessException;
-import com.gbm.challenge.gbmchallenge.model.request.SendOrderDto;
 import com.gbm.challenge.gbmchallenge.model.response.SendOrderResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.springframework.web.servlet.support.RequestContext;
 
 import java.util.Objects;
 
@@ -30,18 +27,14 @@ public class ErrorController extends ResponseEntityExceptionHandler {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public final HttpEntity<SendOrderResponse> handleBusinessErrors(BusinessException error, WebRequest request){
         log.error("An exception happened while processing the request, {}", error.toString());
-        try{
-            Object cash = request.getAttribute("cash", RequestAttributes.SCOPE_REQUEST);
+        Object cash = request.getAttribute("cash", RequestAttributes.SCOPE_REQUEST);
 
-            if (Objects.isNull(cash)) {
-                throw new IllegalArgumentException("Request variable could not be set.");
-            }
-
-            return new HttpEntity(createNegativeResponse(error.getExceptionCode(),
-                    Objects.toString(cash)));
-        } catch (Exception e) {
-            throw e;
+        if (Objects.isNull(cash)) {
+            throw new IllegalArgumentException("Request variable could not be set.");
         }
+
+        return new HttpEntity<>(createNegativeResponse(error.getExceptionCode(),
+                Objects.toString(cash)));
     }
 
     @ExceptionHandler({Exception.class})

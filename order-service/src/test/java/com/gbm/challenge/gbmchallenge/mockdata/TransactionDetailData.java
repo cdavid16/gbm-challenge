@@ -41,10 +41,6 @@ public class TransactionDetailData extends BaseQueryableDummy<TransactionDetailE
         }
     }
 
-    public TransactionDetailEntity getTransactionDetail() {
-        return new TransactionDetailEntity();
-    }
-
     @Override
     public Set<TransactionDetailEntity> getDetails() {
         return transactionDetailEntities;

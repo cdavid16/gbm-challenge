@@ -13,15 +13,13 @@ import java.util.HashSet;
 public interface AccountStockRepository extends JpaRepository<AccountStockEntity,
         AccountStockEntity.AccountStockEntityId> {
 
-    default AccountStockEntity createAccountStockEntity(Long quantity, AccountEntity account, IssuerEntity issuer) {
+    default void createAccountStockEntity(Long quantity, AccountEntity account, IssuerEntity issuer) {
         AccountStockEntity entity = new AccountStockEntity(quantity, account, issuer);
 
         if (CollectionsHelper.isEmptyOrNull(account.getAccountStocks())) {
             account.setAccountStocks(new HashSet<>());
         }
         account.getAccountStocks().add(entity);
-
-        return entity;
     }
 
 }

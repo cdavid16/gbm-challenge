@@ -28,10 +28,6 @@ public class TransactionData {
         accountData.getDummyAccount().setTransactions(transactionEntities);
     }
 
-    public TransactionEntity getDummyTransaction() {
-        return TRANSACTION_1;
-    }
-
     public Set<TransactionEntity> getDummyTransactions() {
         return transactionEntities;
     }

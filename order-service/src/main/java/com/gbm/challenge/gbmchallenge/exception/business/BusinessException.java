@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 public abstract class BusinessException extends RuntimeException {
 
-    private String exceptionCode;
+    private final String exceptionCode;
 
     public BusinessException(ExceptionEnum exception) {
         super(exception.getReason());

@@ -18,6 +18,7 @@ class MapperResponseFactoryTest {
         AccountEntity source = new AccountEntity();
         Object dest = createPositiveResponse(source, CreateAccountResponse.class);
 
+        //noinspection ConstantConditions
         assertTrue(dest instanceof CreateAccountResponse);
     }
 

@@ -7,7 +7,7 @@ import java.util.Collection;
 @UtilityClass
 public class CollectionsHelper {
 
-    public static boolean isEmptyOrNull(final Collection collection){
+    public static <T> boolean isEmptyOrNull(final Collection<T> collection){
         return collection==null || collection.isEmpty();
     }
 }

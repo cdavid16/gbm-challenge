@@ -15,7 +15,7 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity, 
         return new TransactionEntity(account, timestamp);
     }
 
-    default TransactionDetailEntity createTransactionDetail(final TransactionEntity transaction,
+    default void createTransactionDetail(final TransactionEntity transaction,
                                                             final IssuerEntity issuer,
                                                             final OperationEnum operation,
                                                             final Long quantity,
@@ -24,11 +24,6 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity, 
                                             quantity, price);
         transaction.getTransactionDetails().add(transactionDetail);
         issuer.getTransactionDetails().add(transactionDetail);
-        return transactionDetail;
-    }
-
-    default TransactionEntity commitTransaction(TransactionEntity transaction) {
-        return saveAndFlush(transaction);
     }
 
 }

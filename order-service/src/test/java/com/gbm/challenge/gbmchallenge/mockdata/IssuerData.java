@@ -13,7 +13,7 @@ public class IssuerData {
     public final IssuerEntity AAPL;
     public final IssuerEntity AMZN;
     public final IssuerEntity NFTX;
-    public Set<IssuerEntity> issuers;
+    public final Set<IssuerEntity> issuers;
 
     public IssuerData() {
         AAPL = new IssuerEntity("1", AAPL_NAME, null, null);

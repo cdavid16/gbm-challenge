@@ -14,7 +14,6 @@ import java.util.Set;
 import static com.gbm.challenge.gbmchallenge.utils.AccountStockHelper.buildBalanceMap;
 import static java.util.Map.entry;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 class AccountStockHelperTest extends BaseTestWithData {
 
@@ -100,7 +99,6 @@ class AccountStockHelperTest extends BaseTestWithData {
 
     @Test
     void updateStockBalanceShouldThrowIllegalArgumentExceptionWhenOperationIsNull() {
-        OperationEnum operationEnum = OperationEnum.SELL;
         var currentPosition = AccountStockData.getDummy();
 
         assertThrows(IllegalArgumentException.class, () ->

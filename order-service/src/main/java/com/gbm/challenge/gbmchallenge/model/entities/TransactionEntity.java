@@ -1,6 +1,5 @@
 package com.gbm.challenge.gbmchallenge.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gbm.challenge.gbmchallenge.wrapper.UUIDSource;
 import lombok.*;
 

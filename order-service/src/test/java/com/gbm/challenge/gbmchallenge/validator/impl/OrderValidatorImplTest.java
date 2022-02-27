@@ -20,10 +20,10 @@ import static org.mockito.Mockito.when;
 class OrderValidatorImplTest extends BaseTestWithData {
 
     private OrderValidator validator;
-    private MarketClosedValidator marketClosedValidator = mock(MarketClosedValidator.class);
-    private DuplicateOperationValidator duplicateOperationValidator = mock(DuplicateOperationValidator.class);
-    private StockBalanceValidator stockBalanceValidator = mock(StockBalanceValidator.class);
-    private OrderBalanceValidator orderBalanceValidator = mock(OrderBalanceValidator.class);
+    private final MarketClosedValidator marketClosedValidator = mock(MarketClosedValidator.class);
+    private final DuplicateOperationValidator duplicateOperationValidator = mock(DuplicateOperationValidator.class);
+    private final StockBalanceValidator stockBalanceValidator = mock(StockBalanceValidator.class);
+    private final OrderBalanceValidator orderBalanceValidator = mock(OrderBalanceValidator.class);
 
     @BeforeEach
     void setup() {

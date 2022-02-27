@@ -4,11 +4,11 @@ import com.gbm.challenge.gbmchallenge.mockdata.*;
 
 public abstract class BaseTestWithData {
 
-    protected AccountData accountData;
-    protected IssuerData issuerData;
-    protected TransactionData transactionData;
-    protected TransactionDetailData transactionDetailData;
-    protected AccountStockData accountStockData;
+    protected final AccountData accountData;
+    protected final IssuerData issuerData;
+    protected final TransactionData transactionData;
+    protected final TransactionDetailData transactionDetailData;
+    protected final AccountStockData accountStockData;
 
     public BaseTestWithData() {
         this.accountData = new AccountData();

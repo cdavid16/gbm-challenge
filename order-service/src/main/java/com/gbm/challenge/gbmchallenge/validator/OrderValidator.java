@@ -2,7 +2,6 @@ package com.gbm.challenge.gbmchallenge.validator;
 
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.request.SendOrderDto;
-import com.gbm.challenge.gbmchallenge.validator.impl.OrderValidatorImpl;
 
 @FunctionalInterface
 public interface OrderValidator {

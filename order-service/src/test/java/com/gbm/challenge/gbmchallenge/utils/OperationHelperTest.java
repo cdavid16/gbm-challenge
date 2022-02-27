@@ -11,11 +11,10 @@ class OperationHelperTest {
 
     @Test
     void computeAmountAppliedShouldThrowIllegalArgumentExceptionWhenTransactionIsNull() {
-        OperationEnum transaction = null;
         Long totalShares = 1L;
         Double sharePrice = 0.0;
         assertThrows(IllegalArgumentException.class,
-                () -> OperationHelper.computeAmountApplied(transaction, totalShares, sharePrice));
+                () -> OperationHelper.computeAmountApplied(null, totalShares, sharePrice));
     }
 
     @Test

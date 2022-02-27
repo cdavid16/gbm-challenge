@@ -87,7 +87,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionDetailEntity createTransactionDetails(final TransactionEntity transaction,
+    public void createTransactionDetails(final TransactionEntity transaction,
                                                             final String issuerName,
                                                             final OperationEnum operation,
                                                             final Long quantity,
@@ -98,7 +98,7 @@ public class TransactionServiceImpl implements TransactionService {
         NumberHelper.isPositive(quantity);
         NumberHelper.isPositive(price);
         IssuerEntity issuer = this.issuerRepository.findIssuerByName(issuerName);
-        return this.transactionRepository.createTransactionDetail(transaction, issuer, operation, quantity, price);
+        this.transactionRepository.createTransactionDetail(transaction, issuer, operation, quantity, price);
     }
 
     public void updateAccountStock(final TransactionEntity transaction, final Set<String> issuers) {

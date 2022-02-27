@@ -9,7 +9,6 @@ import com.gbm.challenge.gbmchallenge.model.response.CurrentBalance;
 import com.gbm.challenge.gbmchallenge.model.response.SendOrderResponse;
 import com.gbm.challenge.gbmchallenge.utils.NumberHelper;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.util.Validate;
 import org.modelmapper.ModelMapper;
 

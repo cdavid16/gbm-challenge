@@ -3,7 +3,6 @@ package com.gbm.challenge.gbmchallenge.mockdata;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountStockEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.IssuerEntity;
-import com.gbm.challenge.gbmchallenge.model.entities.TransactionEntity;
 
 import java.util.Set;
 import java.util.stream.LongStream;

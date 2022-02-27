@@ -32,7 +32,7 @@ public class AccountStockHelper {
                 ;
     }
 
-    public static AccountStockEntity updateStockBalance(final OperationEnum operation,
+    public static void updateStockBalance(final OperationEnum operation,
                                                         final AccountStockEntity currentPosition,
                                                         final Long transactionShares) {
         NumberHelper.isPositive(transactionShares);
@@ -44,7 +44,6 @@ public class AccountStockHelper {
             throw new InsufficientStocksException();
         }
         currentPosition.setQuantity(Math.abs(currentShares));
-        return currentPosition;
     }
 
 }

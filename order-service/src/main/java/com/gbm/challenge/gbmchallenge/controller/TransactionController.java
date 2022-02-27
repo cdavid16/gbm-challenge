@@ -13,17 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
 @Slf4j
 @RestController
 public class TransactionController {
 
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService) {
+    public TransactionController(final TransactionService transactionService) {
         this.transactionService = transactionService;
     }
 

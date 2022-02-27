@@ -4,7 +4,6 @@ import com.gbm.challenge.gbmchallenge.exception.business.ClosedMarketException;
 import com.gbm.challenge.gbmchallenge.utils.NumberHelper;
 import com.gbm.challenge.gbmchallenge.validator.MarketClosedValidator;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.util.Validate;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 

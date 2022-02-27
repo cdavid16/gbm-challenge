@@ -1,7 +1,6 @@
 package com.gbm.challenge.gbmchallenge.validator.impl;
 
 import com.gbm.challenge.gbmchallenge.exception.business.DuplicateOperationException;
-import com.gbm.challenge.gbmchallenge.model.entities.TransactionDetailEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.TransactionEntity;
 import com.gbm.challenge.gbmchallenge.model.request.OperationDto;
 import com.gbm.challenge.gbmchallenge.model.request.SendOrderDto;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Slf4j
 @Component

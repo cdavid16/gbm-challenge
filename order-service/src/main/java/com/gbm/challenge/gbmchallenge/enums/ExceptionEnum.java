@@ -23,8 +23,8 @@ public enum ExceptionEnum {
             "The issuer you are trying to use is not unique, this is invalid, please contact IT.")
     ;
 
-    private String code;
-    private String reason;
+    private final String code;
+    private final String reason;
 
     ExceptionEnum(final String code, final String reason) {
         this.code = code;

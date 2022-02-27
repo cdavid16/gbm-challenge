@@ -8,8 +8,6 @@ import org.apache.commons.lang.util.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.Valid;
-
 @Slf4j
 @Component
 public class OrderValidatorImpl implements OrderValidator {
