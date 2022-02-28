@@ -1,6 +1,7 @@
 package com.gbm.challenge.gbmchallenge.validator.impl;
 
 import com.gbm.challenge.gbmchallenge.exception.business.ClosedMarketException;
+import com.gbm.challenge.gbmchallenge.exception.business.FutureDateException;
 import com.gbm.challenge.gbmchallenge.validator.MarketClosedValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,13 @@ class MarketClosedValidatorTest {
                 new SimpleDateFormat("dd-MM-yyyy HH:mm:ss"));
 
         assertThrows(ClosedMarketException.class, ()-> validator.validateMarketOpen(timestamp));
+    }
+
+    @Test
+    void validateMarketOpenShouldThrowFutureDateExceptionWhenDateIsGreaterThanNow() {
+        Long timestamp = new Timestamp(new Date().getTime()).getTime() + 10000;
+
+        assertThrows(FutureDateException.class, ()-> validator.validateMarketOpen(timestamp));
     }
 
     @Test

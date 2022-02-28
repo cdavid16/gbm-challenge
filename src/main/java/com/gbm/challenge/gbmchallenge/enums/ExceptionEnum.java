@@ -20,7 +20,9 @@ public enum ExceptionEnum {
     INVALID_ISSUER_EXCEPTION("INVALID_ISSUER",
             "The issuer you are trying to use does not exist."),
     TOO_MANY_ISSUERS_EXCEPTION("TOO_MANY_ISSUERS",
-            "The issuer you are trying to use is not unique, this is invalid, please contact IT.")
+            "The issuer you are trying to use is not unique, this is invalid, please contact IT."),
+    FUTURE_DATE_EXCEPTION("FUTURE_DATE_EXCEPTION",
+                                       "The timestamp you are using is greater than current date.")
     ;
 
     private final String code;

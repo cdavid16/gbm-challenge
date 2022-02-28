@@ -1,6 +1,7 @@
 package com.gbm.challenge.gbmchallenge.validator.impl;
 
 import com.gbm.challenge.gbmchallenge.exception.business.ClosedMarketException;
+import com.gbm.challenge.gbmchallenge.exception.business.FutureDateException;
 import com.gbm.challenge.gbmchallenge.utils.NumberHelper;
 import com.gbm.challenge.gbmchallenge.validator.MarketClosedValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ public class MarketClosedValidatorImpl implements MarketClosedValidator {
         NumberHelper.isPositive(timestamp);
 
         LocalDateTime localDateTime = new Timestamp(timestamp).toLocalDateTime();
+        isFutureDate(localDateTime);
         validateDay(localDateTime);
         validateTime(localDateTime.toLocalTime());
         log.info("Market is open.");
@@ -47,6 +49,13 @@ public class MarketClosedValidatorImpl implements MarketClosedValidator {
         }
         if (hour>=CLOSE_HOUR) {
             throw new ClosedMarketException();
+        }
+    }
+
+    private void isFutureDate(final LocalDateTime localDateTime) {
+        LocalDateTime now = LocalDateTime.now();
+        if (localDateTime.isAfter(now)) {
+            throw new FutureDateException();
         }
     }
 }
