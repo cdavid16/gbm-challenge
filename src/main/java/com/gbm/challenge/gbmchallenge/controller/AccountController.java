@@ -2,7 +2,7 @@ package com.gbm.challenge.gbmchallenge.controller;
 
 import com.gbm.challenge.gbmchallenge.factory.MapperResponseFactory;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
-import com.gbm.challenge.gbmchallenge.model.response.CreateAccountDto;
+import com.gbm.challenge.gbmchallenge.model.response.CreateAccountResponseDto;
 import com.gbm.challenge.gbmchallenge.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +26,10 @@ public class AccountController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(code = HttpStatus.OK)
-    public HttpEntity<CreateAccountDto> createAccount(@RequestBody @Validated final com.gbm.challenge.gbmchallenge.model.request.CreateAccountDto request){
+    public HttpEntity<CreateAccountResponseDto> createAccount(@RequestBody @Validated final com.gbm.challenge.gbmchallenge.model.request.CreateAccountDto request){
         log.info("Request: {}", request);
         AccountEntity accountEntity = accountService.createAccount(request.getCash());
-        CreateAccountDto responseEntity = MapperResponseFactory.createPositiveResponse(accountEntity, CreateAccountDto.class);
+        CreateAccountResponseDto responseEntity = MapperResponseFactory.createPositiveResponse(accountEntity, CreateAccountResponseDto.class);
         log.info("Response: {}", responseEntity);
         return new HttpEntity<>(responseEntity);
     }

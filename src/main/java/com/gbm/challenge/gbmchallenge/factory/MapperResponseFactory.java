@@ -4,7 +4,7 @@ import com.gbm.challenge.gbmchallenge.mapper.AccountEntityResponseMapper;
 import com.gbm.challenge.gbmchallenge.mapper.TransactionEntityResponseMapper;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.TransactionEntity;
-import com.gbm.challenge.gbmchallenge.model.response.CreateAccountDto;
+import com.gbm.challenge.gbmchallenge.model.response.CreateAccountResponseDto;
 import com.gbm.challenge.gbmchallenge.model.response.CurrentBalanceDto;
 import com.gbm.challenge.gbmchallenge.model.response.SendOrderResponse;
 import com.gbm.challenge.gbmchallenge.utils.NumberHelper;
@@ -22,7 +22,7 @@ import static java.util.Map.entry;
 public class MapperResponseFactory {
 
     private static final Map<String, ModelMapper> map = Map.ofEntries(
-            entry(buildKey(AccountEntity.class.getName(), CreateAccountDto.class.getName()),
+            entry(buildKey(AccountEntity.class.getName(), CreateAccountResponseDto.class.getName()),
                     new AccountEntityResponseMapper()),
             entry(buildKey(TransactionEntity.class.getName(), SendOrderResponse.class.getName()),
                     new TransactionEntityResponseMapper())

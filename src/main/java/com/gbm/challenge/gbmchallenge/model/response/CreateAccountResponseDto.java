@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-public class CreateAccountDto {
+public class CreateAccountResponseDto {
 
     @JsonAlias("id") private String accountId;
     @JsonAlias("cash") private BigDecimal balance;

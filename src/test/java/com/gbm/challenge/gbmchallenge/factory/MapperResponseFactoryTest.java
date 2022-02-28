@@ -2,7 +2,7 @@ package com.gbm.challenge.gbmchallenge.factory;
 
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
 import com.gbm.challenge.gbmchallenge.model.entities.TransactionDetailEntity;
-import com.gbm.challenge.gbmchallenge.model.response.CreateAccountDto;
+import com.gbm.challenge.gbmchallenge.model.response.CreateAccountResponseDto;
 import com.gbm.challenge.gbmchallenge.model.response.SendOrderResponse;
 import org.junit.jupiter.api.Test;
 
@@ -16,23 +16,23 @@ class MapperResponseFactoryTest {
     @Test
     void createPositiveResponseShouldCreatePositiveResponseWhenMappingExists() {
         AccountEntity source = new AccountEntity();
-        Object dest = createPositiveResponse(source, CreateAccountDto.class);
+        Object dest = createPositiveResponse(source, CreateAccountResponseDto.class);
 
         //noinspection ConstantConditions
-        assertTrue(dest instanceof CreateAccountDto);
+        assertTrue(dest instanceof CreateAccountResponseDto);
     }
 
     @Test
     void createPositiveResponseShouldThrowIllegalArgumentExceptionWhenThereIsNoMapping() {
         TransactionDetailEntity source = new TransactionDetailEntity();
         assertThrows(IllegalArgumentException.class, () -> createPositiveResponse(source,
-                CreateAccountDto.class));
+                CreateAccountResponseDto.class));
     }
 
     @Test
     void createPositiveResponseShouldThrowIllegalArgumentExceptionWhenSourceIsNull() {
         assertThrows(IllegalArgumentException.class, () -> createPositiveResponse(null,
-                CreateAccountDto.class));
+                CreateAccountResponseDto.class));
     }
 
     @Test

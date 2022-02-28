@@ -2,10 +2,13 @@ package com.gbm.challenge.gbmchallenge.model.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.gbm.challenge.gbmchallenge.exception.business.MalformedRequestException;
 import com.gbm.challenge.gbmchallenge.utils.CollectionsHelper;
 import lombok.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @ToString
@@ -28,6 +31,11 @@ public class SendOrderDto {
     @JsonIgnore
     public List<OperationDto> getOperations() {
         if (isMultiOperations()) {
+
+            if(containsIndividualData()) {
+                throw new MalformedRequestException();
+            }
+
             return this.operations;
         }
         return List.of(getOperation());
@@ -36,6 +44,12 @@ public class SendOrderDto {
     @JsonIgnore
     public OperationDto getOperation() {
         return new OperationDto(this.operation, this.issuer, this.totalShares, this.sharePrice);
+    }
+
+    @JsonIgnore
+    public boolean containsIndividualData() {
+        return !StringUtils.isEmpty(operation) || !StringUtils.isEmpty(issuer)
+                || !Objects.isNull(totalShares) || !Objects.isNull(sharePrice);
     }
 
 }

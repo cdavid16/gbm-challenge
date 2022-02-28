@@ -21,8 +21,12 @@ public enum ExceptionEnum {
             "The issuer you are trying to use does not exist."),
     TOO_MANY_ISSUERS_EXCEPTION("TOO_MANY_ISSUERS",
             "The issuer you are trying to use is not unique, this is invalid, please contact IT."),
-    FUTURE_DATE_EXCEPTION("FUTURE_DATE_EXCEPTION",
-                                       "The timestamp you are using is greater than current date.")
+    FUTURE_DATE_EXCEPTION("FUTURE_DATE",
+                                       "The timestamp you are using is greater than current date."),
+    MALFORMED_REQUEST_EXCEPTION("MALFORMED_REQUEST",
+            "The request you sent cannot be mixed, please include individual order into the issuers array."),
+    UNHANDLED_EXCEPTION("UNHANDLED_EXCEPTION",
+            "The request you are trying to execute is not handled, please contact IT.")
     ;
 
     private final String code;

@@ -1,6 +1,8 @@
 package com.gbm.challenge.gbmchallenge.controller;
 
 import com.gbm.challenge.gbmchallenge.exception.business.BusinessException;
+import com.gbm.challenge.gbmchallenge.exception.business.MalformedRequestException;
+import com.gbm.challenge.gbmchallenge.exception.business.UnhandledException;
 import com.gbm.challenge.gbmchallenge.model.response.SendOrderResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -30,19 +32,30 @@ public class ErrorController extends ResponseEntityExceptionHandler {
         Object cash = request.getAttribute("cash", RequestAttributes.SCOPE_REQUEST);
 
         if (Objects.isNull(cash)) {
-            throw new IllegalArgumentException("Request variable could not be set.");
+            log.error("Request variable could not be set.");
+            return new HttpEntity<>(createNegativeResponse(error.getExceptionCode(), "0.00"));
         }
 
         return new HttpEntity<>(createNegativeResponse(error.getExceptionCode(),
                 Objects.toString(cash)));
     }
 
+    @ExceptionHandler({IllegalArgumentException.class})
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public final HttpEntity<SendOrderResponse> handleInputException(IllegalArgumentException error, WebRequest request){
+        log.error("An error happened while executing the request: {}", error.getStackTrace());
+        error.printStackTrace();
+        return handleBusinessErrors(new MalformedRequestException(), request);
+    }
+
+
     @ExceptionHandler({Exception.class})
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR,
                     reason = "An unexpected error happened while processing the request")
-    public final HttpEntity<String> handleUnexpectedErrors(Exception error, WebRequest request){
+    public final HttpEntity<SendOrderResponse> handleUnexpectedErrors(Exception error, WebRequest request){
         log.error("An unhandled exception happened while processing the request {}", (Object) error.getStackTrace());
-        return new HttpEntity<>("An unexpected error happened while processing the request");
+        error.printStackTrace();
+        return handleBusinessErrors(new UnhandledException(), request);
     }
 
 }
