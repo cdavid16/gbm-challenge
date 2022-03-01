@@ -2,6 +2,7 @@ package com.gbm.challenge.gbmchallenge.controller;
 
 import com.gbm.challenge.gbmchallenge.factory.MapperResponseFactory;
 import com.gbm.challenge.gbmchallenge.model.entities.AccountEntity;
+import com.gbm.challenge.gbmchallenge.model.request.CreateAccountDto;
 import com.gbm.challenge.gbmchallenge.model.response.CreateAccountResponseDto;
 import com.gbm.challenge.gbmchallenge.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class AccountController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(code = HttpStatus.OK)
-    public HttpEntity<CreateAccountResponseDto> createAccount(@RequestBody @Validated final com.gbm.challenge.gbmchallenge.model.request.CreateAccountDto request){
+    public HttpEntity<CreateAccountResponseDto> createAccount(@RequestBody @Validated final CreateAccountDto request){
         log.info("Request: {}", request);
         AccountEntity accountEntity = accountService.createAccount(request.getCash());
         CreateAccountResponseDto responseEntity = MapperResponseFactory.createPositiveResponse(accountEntity, CreateAccountResponseDto.class);

@@ -13,6 +13,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
+import java.util.TimeZone;
 
 @Slf4j
 @Component
@@ -26,8 +27,9 @@ public class MarketClosedValidatorImpl implements MarketClosedValidator {
     @Override
     public boolean validateMarketOpen(@Validated final Long timestamp) {
         NumberHelper.isPositive(timestamp);
-
+        log.info("Current Timezone: {}", TimeZone.getDefault());
         LocalDateTime localDateTime = new Timestamp(timestamp).toLocalDateTime();
+        log.info("Timestamp of the request: {}", localDateTime);
         isFutureDate(localDateTime);
         validateDay(localDateTime);
         validateTime(localDateTime.toLocalTime());

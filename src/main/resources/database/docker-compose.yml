@@ -2,6 +2,8 @@ version: '3'
 services:
   gbm-challenges-server:
     image: mysql:8.0.28-oracle
+    volumes:
+      - mydb:/home/db/mysql
     environment:
       MYSQL_ROOT_PASSWORD: cvillarreal1990
       MYSQL_DATABASE: gbm_challenge
@@ -11,3 +13,6 @@ services:
     image: adminer
     ports:
       - "8080:8080"
+volumes:
+  mydb:
+    external: true

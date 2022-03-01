@@ -12,8 +12,8 @@ Clone report from [GitHub](https://github.com/cdavid16/gbm-challenge)
 
 How to install database
 1. Locate in [docker-compose.yml](src/main/resources/database) directory using the terminal
-2. Execute **docker-compose up** command.
-3. Execute **docker-compose ps** in the same directory, but using a different terminal instance, take note of the
+2. Execute `docker-compose up` command.
+3. Execute `docker-compose ps` in the same directory, but using a different terminal instance, take note of the
 container with prefix "database_gbm-challenges-server", you will need it later on.
 5. Open [this URL](http://localhost:8080/) in your browser
 6. Set below parameters to establish the connection properly:
@@ -32,18 +32,18 @@ container with prefix "database_gbm-challenges-server", you will need it later o
 
 
 Create network in Docker.
-1. In order to make your database container visible for application container, you need to create a network using: 
-**docker network create gbm-challenge-connection**
-2. Then get network's IP using **docker network inspect gbm-challenge-connection**
-3. Connect database container to the network created using 
-**docker network connect gbm-challenge-connection database_gbm-challenges-server_1** 
+1. In order to make your database container visible for application container, you need to create a network using:
+   `docker network create gbm-challenge-connection`
+2. Then get network's IP using `docker network inspect gbm-challenge-connection`
+3. Connect database container to the network created using
+   `docker network connect gbm-challenge-connection database_gbm-challenges-server_1` 
 (note: last parameter is container name, make sure it matches from the one you got from db installation)
 
 How to install Java Application
-1. Locate in [application folder](src/main/resources/application).
-2. Execute **mvn spring-boot:build-image** command
-3. Then execute **docker run -it -p9000:9000 --env-file variables.env --network gbm-challenge-connection 
-gbm-challenge:0.0.1-SNAPSHOT**
+1. Locate in [application folder](/).
+2. Execute `mvn spring-boot:build-image` command
+3. Then execute `docker run -it -p9000:9000 --env-file variables.env --network gbm-challenge-connection 
+gbm-challenge:0.0.1-SNAPSHOT`
 4. Application should start right away under your port 9000, you can test it using 
 [this link](http://localhost:9000/api/swagger-ui/index.html).
 
@@ -54,4 +54,6 @@ How to query tables
 
 Note:
 **Is very important to keep in mind that DB has no persistance enable, hence installation 
-is required if you delete the container**
+is required if you delete the container, in case you want to enable persistance in the execution.
+please `execute docker volume create --name=mydb` command and uncomment code from 
+[docker-compose.yml](src/main/resources/database/docker-compose.yml) **

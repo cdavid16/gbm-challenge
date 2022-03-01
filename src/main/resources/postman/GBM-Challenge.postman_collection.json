@@ -1,0 +1,230 @@
+{
+	"id": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+	"name": "GBM-Challenge",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"name": "Create Account",
+			"description": "",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"order": [
+				"32390138-8576-0cd4-89b9-d7e99263a67a",
+				"6f816681-885b-9f60-bb24-6e2b5b7c6135",
+				"c6a6d470-e801-2245-63ba-685cb0857aed",
+				"fd20406d-7859-9e7a-0105-a4f2fd1486a9"
+			],
+			"owner": "4988686",
+			"folders_order": [],
+			"id": "41089dd2-bad8-ede9-c3f9-4e023ac57a29"
+		},
+		{
+			"name": "Create Transaction",
+			"description": "",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"order": [
+				"d90e4f63-e547-f14e-c521-4ad9548e6f39",
+				"a7097d9f-5a01-9d75-c836-a1a1b690b960"
+			],
+			"owner": "4988686",
+			"folders_order": [],
+			"id": "a1cee833-7bd5-8234-4cff-cf52aa740ead"
+		}
+	],
+	"folders_order": [
+		"41089dd2-bad8-ede9-c3f9-4e023ac57a29",
+		"a1cee833-7bd5-8234-4cff-cf52aa740ead"
+	],
+	"timestamp": 1645852338113,
+	"owner": "4988686",
+	"public": false,
+	"requests": [
+		{
+			"id": "32390138-8576-0cd4-89b9-d7e99263a67a",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}/accounts",
+			"folder": "41089dd2-bad8-ede9-c3f9-4e023ac57a29",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646106493385,
+			"name": "Valid input",
+			"description": "Valid account",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"responses": [],
+			"rawModeData": "{\n\t\"cash\": \"50000\"\n}"
+		},
+		{
+			"id": "6f816681-885b-9f60-bb24-6e2b5b7c6135",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}/accounts",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Null input",
+			"description": "Null cash",
+			"descriptionFormat": "html",
+			"time": 1645852556375,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "41089dd2-bad8-ede9-c3f9-4e023ac57a29",
+			"rawModeData": "{\n\t\"cash\": null\n}"
+		},
+		{
+			"id": "a7097d9f-5a01-9d75-c836-a1a1b690b960",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}/accounts/d09f5dc5-bfa6-479c-b6c7-6b92240f55fb/orders",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Valid Single Order",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1646106567658,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "a1cee833-7bd5-8234-4cff-cf52aa740ead",
+			"rawModeData": "{\n\t\"timestamp\": 2645554101000,\n\t\"operation\": \"BUY\",\n\t\"issuer_name\": \"AAPL\",\n\t\"total_shares\": 5,\n\t\"share_price\": 1\n}"
+		},
+		{
+			"id": "c6a6d470-e801-2245-63ba-685cb0857aed",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}/accounts",
+			"folder": "41089dd2-bad8-ede9-c3f9-4e023ac57a29",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646112969438,
+			"name": "String input",
+			"description": "String input",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"responses": [],
+			"rawModeData": "{\n\t\"cash\": \"This is a string\"\n}"
+		},
+		{
+			"id": "d90e4f63-e547-f14e-c521-4ad9548e6f39",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}/accounts/1761640a-b42b-4011-ad02-975434e4bc1a/orders",
+			"folder": "a1cee833-7bd5-8234-4cff-cf52aa740ead",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646110192438,
+			"name": "Valid Multiorder",
+			"description": "",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"responses": [],
+			"rawModeData": "{\n\t\"timestamp\": 1646055460000,\n\t\"operation\": \"BUY\",\n\t\"issuer_name\": \"AAPL\",\n\t\"total_shares\": 10,\n\t\"share_price\": 80\n}"
+		},
+		{
+			"id": "fd20406d-7859-9e7a-0105-a4f2fd1486a9",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{host}}/accounts",
+			"folder": "41089dd2-bad8-ede9-c3f9-4e023ac57a29",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646112968000,
+			"name": "Trash Request",
+			"description": "Trash request",
+			"collectionId": "2e76c36d-8210-0cc5-ec41-2d0be0a94e74",
+			"responses": [],
+			"rawModeData": "trash request"
+		}
+	]
+}
