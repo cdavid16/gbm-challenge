@@ -17,7 +17,6 @@ import java.util.Collections;
 @EnableSwagger2
 public class ConfigBean {
 
-    //SWAGGER URL: http://localhost:8080/swagger-ui/index.html
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

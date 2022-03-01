@@ -44,7 +44,8 @@ How to install Java Application
 2. Execute **mvn spring-boot:build-image** command
 3. Then execute **docker run -it -p9000:9000 --env-file variables.env --network gbm-challenge-connection 
 gbm-challenge:0.0.1-SNAPSHOT**
-4. Application should start right away under your port 9000.
+4. Application should start right away under your port 9000, you can test it using 
+[this link](http://localhost:9000/api/swagger-ui/index.html).
 
 How to query tables
 1. Open [this URL](http://localhost:8080/) in your browser.
