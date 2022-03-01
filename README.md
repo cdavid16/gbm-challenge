@@ -46,6 +46,8 @@ How to install Java Application
 gbm-challenge:0.0.1-SNAPSHOT`
 4. Application should start right away under your port 9000, you can test it using 
 [this link](http://localhost:9000/api/swagger-ui/index.html).
+5. In case you would like to review sample request, you can find some sample request in 
+[this postman collection](src/main/resources/postman/GBM-Challenge.postman_collection.json).
 
 How to query tables
 1. Open [this URL](http://localhost:8080/) in your browser.
