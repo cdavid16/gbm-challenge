@@ -11,7 +11,7 @@ How to get the code:
 Clone report from [GitHub](https://github.com/cdavid16/gbm-challenge)
 
 How to install database
-1. Locate in [docker-compose.yml](../gbm-challenge/src/main/resources/database) directory
+1. Locate in [docker-compose.yml](src/main/resources/database) directory using the terminal
 2. Execute **docker-compose up** command.
 3. Execute **docker-compose ps** in the same directory, but using a different terminal instance, take note of the
 container with prefix "database_gbm-challenges-server", you will need it later on.
@@ -24,10 +24,10 @@ container with prefix "database_gbm-challenges-server", you will need it later o
 - Database: gbm_challenge
 - Permanent login: Checked
 6. Click on SQL Command option from the left panel.
-7. Copy and paste the content from [ddl.sql](../gbm-challenge/src/main/resources/database/ddl/ddl.sql).
+7. Copy and paste the content from [ddl.sql](src/main/resources/database/ddl/ddl.sql).
 8. Click on execute button.
 9. Then click again in SQL Command option and copy and paste the content 
-[issuers_dml.sql](../gbm-challenge/src/main/resources/database/issuers_dml.sql).
+[issuers_dml.sql](src/main/resources/database/issuers_dml.sql).
 10. Ready database is up and running.
 
 
@@ -37,11 +37,10 @@ Create network in Docker.
 2. Then get network's IP using **docker network inspect gbm-challenge-connection**
 3. Connect database container to the network created using 
 **docker network connect gbm-challenge-connection database_gbm-challenges-server_1** 
-(note: last parameter is container name, make sure it matches from the one you got from db installation).
-4. 
+(note: last parameter is container name, make sure it matches from the one you got from db installation)
 
 How to install Java Application
-1. Locate in [application folder](../gbm-challenge/src/main/resources/application).
+1. Locate in [application folder](src/main/resources/application).
 2. Execute **mvn spring-boot:build-image** command
 3. Then execute **docker run -it -p9000:9000 --env-file variables.env --network gbm-challenge-connection 
 gbm-challenge:0.0.1-SNAPSHOT**
