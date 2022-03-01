@@ -6,6 +6,7 @@ Prerequisites:
 3. Docker
 4. Docker hub account
 5. Make sure you have below ports: 8080, 3306, 9000
+6. Postman**
 
 How to get the code:
 Clone report from [GitHub](https://github.com/cdavid16/gbm-challenge)
